@@ -4,7 +4,7 @@ from googleapiclient.errors import HttpError
 from google.cloud import translate_v2 as translate
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/runner/work/my-google-credentials.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/runner/rhulucas/testing1/my-google-credentials.json"
 #os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ubuntu/my-google-credentials.json"
 
 DEVELOPER_KEY = config.API_KEY
