@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing
 on:
    push:
        branches:
-          - 'ronghu/a-fastapi-project'
+          - 'ronghu/find-movie-commentary'
 
 jobs:
    test:
