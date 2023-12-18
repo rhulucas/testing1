@@ -1,7 +1,11 @@
 import config
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from google.cloud import translate_v2 as translate
+import os
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/runner/work/my-google-credentials.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ubuntu/my-google-credentials.json"
 
 DEVELOPER_KEY = config.API_KEY
 YOUTUBE_API_SERVICE_NAME = 'youtube'
@@ -9,7 +13,7 @@ YOUTUBE_API_VERSION = 'v3'
 
 class Movie:
     def __init__(self, title):
-        self._title = title
+        self._title = title + " review"
         self._review_videos = []
         self.youtube_service = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
                 developerKey=DEVELOPER_KEY)
@@ -17,7 +21,7 @@ class Movie:
     def youtube_search(self, max_result=10):
         try:
             search_response = self.youtube_service.search().list(
-                q=self._title + " review",
+                q=self._title,
                 part='id,snippet',
                 maxResults=max_result,
                 type='video'
@@ -42,7 +46,7 @@ class Movie:
             return None
         
         
-     def youtube_description(self, video_id):
+    def youtube_description(self, video_id):
         try:
             search_response = self.youtube_service.videos().list(
                 part = 'snippet',
