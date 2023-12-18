@@ -40,3 +40,22 @@ class Movie:
         except HttpError as e:
             print (f'An HTTP error {e.resp.status} occurred:\n{e.content}') 
             return None
+        
+    def youtube_description(self, video_id):
+        try:
+            search_response = self.youtube_service.videos().list(
+                part = 'snippet',
+                id = video_id
+                ).execute()
+            if search_response.get('items'):
+                video = search_response.get('items',[])[0]
+                description = {
+                    'description': video['snippet']['description']
+                    }
+                return description
+            else:
+                return None
+                        
+        except HttpError as e:
+            print (f'An HTTP error {e.resp.status} occurred:\n{e.content}') 
+            return None 
